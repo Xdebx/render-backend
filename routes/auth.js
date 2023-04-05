@@ -14,10 +14,10 @@ router.route('/password/forgot').post(forgotPassword);
 router.route('/password/reset/:token').put(resetPassword);
 router.put('/password/update', isAuthenticatedUser, updatePassword);
 //old
-router.route('/logout').get(logout);
+// router.route('/logout').get(logout);
 // router.route('/logout').post(logout);
 //new
-// router.route('/logout',logout);
+router.route('/logout',logout);
 //old
 // router.put('/me/update', isAuthenticatedUser, updateProfile);
 //new
