@@ -24,7 +24,7 @@ const app = express();
 // NEW CODE
 app.use(express.json({ limit: '100mb' }));
 app.use(cors({
-    origin: "https://pascua-shop.onrender.com", 
+    origin: ["https://pascua-shop.onrender.com", "http://localhost:3000"],
     credentials: true}));
 app.use(cookieParser());
 app.use(express.urlencoded({limit: "100mb", extended: true }));

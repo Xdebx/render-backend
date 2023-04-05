@@ -131,8 +131,6 @@ exports.logout = async (req, res, next) => {
         res.cookie("token", null, {
             expires: new Date(Date.now()), // Set the expiration date to a past date
             httpOnly: true, // Set the cookie as httpOnly to prevent client-side access
-            secure: true,
-            sameSite: 'none'
         });
 
         // Perform additional actions to fully log out the user on the server-side
