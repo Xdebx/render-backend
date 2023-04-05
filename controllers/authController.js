@@ -114,16 +114,35 @@ exports.loginUser = async (req, res, next) => {
     // });
     sendToken(user, 200, res);
 };
-exports.logout = async (req, res, next) => {
-    res.cookie("token", null, {
-        expires: new Date(Date.now()),
-        httpOnly: true,
-    });
+// exports.logout = async (req, res, next) => {
+//     res.cookie("token", null, {
+//         expires: new Date(Date.now()),
+//         httpOnly: true,
+//     });
 
-    res.status(200).json({
-        success: true,
-        message: "Logged out",
-    });
+//     res.status(200).json({
+//         success: true,
+//         message: "Logged out",
+//     });
+// };
+exports.logout = async (req, res, next) => {
+    try {
+        // Clear the "token" cookie from the response
+        res.cookie("token", null, {
+            expires: new Date(Date.now()), // Set the expiration date to a past date
+            httpOnly: true, // Set the cookie as httpOnly to prevent client-side access
+        });
+
+        // Perform additional actions to fully log out the user on the server-side
+        // For example, invalidate the session, revoke the authentication token, etc.
+
+        // Send a success response indicating that the logout was successful
+        return res.status(200).json({ message: "Logout successful" });
+    } catch (error) {
+        // Handle any errors that may occur during the logout process
+        console.error("Error logging out:", error);
+        return res.status(500).json({ error: "Failed to logout" });
+    }
 };
 exports.forgotPassword = async (req, res, next) => {
     const user = await User.findOne({ email: req.body.email });
